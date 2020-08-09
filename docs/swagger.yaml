@@ -1,0 +1,110 @@
+basePath: /customers
+definitions:
+  main.Response:
+    type: object
+host: localhost:9000
+info:
+  contact:
+    email: franroca18@gmail.com
+    name: Francisco Rodriguez
+  description: This is a API to handle a full CRUDL microservice for a customer
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  title: Threefold Tech Challenge API
+  version: "1.0"
+paths:
+  /customers/:
+    get:
+      consumes:
+      - application/json
+      description: get customer recorded
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/main.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/main.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/main.Response'
+      summary: Get a list record of customer
+    put:
+      consumes:
+      - application/json
+      description: Create a customer if IDNumber is not provided otherwise customer is updated if exist
+      operationId: main.Customer-by-json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/main.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/main.Response'
+      summary: Create or update a customer from a given json
+  /customers/{id}:
+    delete:
+      consumes:
+      - text/plain
+      description: delete customer by ID
+      operationId: get-primitive.ObjectID-by-string
+      parameters:
+      - description: ID Number
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/main.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/main.Response'
+      summary: Delete a single record of customer
+    get:
+      consumes:
+      - text/plain
+      description: get customer by ID
+      operationId: get-primitive.ObjectID-to-delete-by-string
+      parameters:
+      - description: ID Number
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/main.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/main.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/main.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/main.Response'
+      summary: Get a single record of customer
+swagger: "2.0"
